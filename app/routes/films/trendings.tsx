@@ -23,6 +23,9 @@ export const meta: MetaFunction = () => ({
 export default function TrendingIndex() {
   const films: Film[] = useLoaderData().result.results;
   return (
-   <ListMedia media={films} text="Trending Movies"/>
+    <>
+    <h2 className="bg-blue-200 text-xl md:text-2xl lg:text-3xl p-4 text-center rounded">Most Trending Movies</h2>
+   <ListMedia media={films} />
+    </>
   )
 };

@@ -14,7 +14,7 @@ export const loader: LoaderFunction = async ({request}) => {
 }
 
 export const meta: MetaFunction = () => ({
-    title: "Now Movies | Movielix",
+    title: "Search | Movielix",
     description: "A list of films"
 });
 
@@ -24,6 +24,9 @@ export default function SearchIndex() {
     const query = useLoaderData().query;
     const films: Film[] = useLoaderData().result.films.results;
     return (
-        <ListMedia media={films} text={`Search Result "${query ? query : ""}"`}/>
+        <>
+            <h2 className="bg-blue-200 text-xl md:text-2xl lg:text-3xl p-4 text-center rounded">{`Search Result "${query ? query : ""}"`}</h2>
+            <ListMedia media={films} />
+        </>
     )
 };

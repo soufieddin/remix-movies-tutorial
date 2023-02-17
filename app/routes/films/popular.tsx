@@ -20,7 +20,10 @@ export const meta: MetaFunction = () => ({
 export default function PopularIndex() {
   const films: Film[] = useLoaderData().results;
   return (
-    <ListMedia media={films} text="Popular Movies"/>
+    <>
+    <h2 className="bg-blue-200 text-xl md:text-2xl lg:text-3xl p-4 text-center rounded">Most Popular Movies</h2>
+    <ListMedia media={films} />
+    </>
 
   )
 };
