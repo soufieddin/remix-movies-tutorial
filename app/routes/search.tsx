@@ -7,7 +7,10 @@ import ListMedia from "~/components/ListMedia";
 
 //SERVER
 export const loader: LoaderFunction = async ({request}) => {
-  return await getSearchMedia(request);
+    const url = new URL(request.url);
+    let query = url.searchParams.get("title");
+    const result =  await getSearchMedia(request);
+    return {result, query}
 }
 
 export const meta: MetaFunction = () => ({
@@ -17,9 +20,10 @@ export const meta: MetaFunction = () => ({
 
 //CLIENT
 export default function SearchIndex() {
+    console.log(useLoaderData())
     const query = useLoaderData().query;
-    const films: Film[] = useLoaderData().films.results;
+    const films: Film[] = useLoaderData().result.films.results;
     return (
-        <ListMedia media={films} text={query}/>
+        <ListMedia media={films} text={`Search Result "${query ? query : ""}"`}/>
     )
 };

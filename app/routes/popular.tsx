@@ -1,5 +1,5 @@
 import type { LoaderFunction, MetaFunction } from "@remix-run/node";
-import { useLoaderData } from "@remix-run/react";
+import { Link, useLoaderData } from "@remix-run/react";
 import points from "requests";
 import type { Film} from "~/api/films";
 import { getMedia } from "~/api/films";
@@ -20,6 +20,7 @@ export const meta: MetaFunction = () => ({
 export default function PopularIndex() {
   const films: Film[] = useLoaderData().results;
   return (
-   <ListMedia media={films} text="Popular Movies"/>
+    <ListMedia media={films} text="Popular Movies"/>
+
   )
 };

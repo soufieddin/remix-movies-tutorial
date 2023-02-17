@@ -22,10 +22,10 @@ export default function ListMedia({media, text}:{media:Film[], text:string}) {
         </button>
       </Form>
       <div className="flex flex-col lg:flex-row justify-between items-center ">
-        <h1 className="text-5xl font-bold text-center">{text}</h1>
+        <h1 className="text-4xl font-bold text-center">{text}</h1>
         <ul className="flex flex-col lg:flex-row lg:justify-between items-center my-10">
           <li className="lg:ml-5">
-            <NavLink to="/">
+            <NavLink to="/trendings">
               Trending Movies
             </NavLink>
           </li>
@@ -43,14 +43,21 @@ export default function ListMedia({media, text}:{media:Film[], text:string}) {
       </div>
 
       <ul className="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-4 mt-10">
-        {media.filter(item => item.poster_path || item.backdrop_path || item.profile_path ).map((item) => (
+        {media?.filter(item => item.poster_path || item.backdrop_path || item.profile_path ).map((item) => (
           <li
           key={item.id}
-          className="hover:shadow-2xl hover:scale-105 hover:font-bold  transform transition duration-500 cursor-pointer"
+          className="hover:shadow-2xl hover:scale-105 hover:font-bold  transform transition duration-500 cursor-pointer border border-blue-200 rounded"
           >
-        <Link to ={`/${item.id}?type=${item.media_type}`}>
-            <div>{item.title || item.name}</div>
+        <Link to ={`/${item.id}?type=${item.media_type || "movie"}`} prefetch="intent">
             <img className="rounded" src={`${base_img_url}${item.poster_path || item.backdrop_path || item.profile_path}`} alt={item.title || item.name} />
+            <div className="flex justify-between items-center p-2">
+                <h6>
+                    {item.title || item.name}
+                </h6>
+                <p className="bg-blue-200 p-2 h-10 rounded">
+                    {item.vote_average ? item.vote_average.toFixed(1) : 0}
+                </p>
+            </div>
           </Link>
           </li>
         ))}
