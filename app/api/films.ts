@@ -33,6 +33,16 @@ export async function getSearchMedia(request: Request) {
     return {films, query};
 }
 
+export async function getMediaById (params: any, request:Request) {
+    const mediaId = params.mediaId;
+    const url = new URL(request.url);
+    let type = url.searchParams.get("type");
+    const response = await fetch(`https://api.themoviedb.org/3/${type}/${mediaId}?api_key=${process.env.API_KEY}&language=en-US&append_to_response=videos`)
+    const film = response.json();
+    return film;
+
+}
+
 // export async function getCombi(request: Request, path: string) {
 //     const url = new URL(request.url);
 //   const query = url.searchParams.get("title");

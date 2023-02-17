@@ -1,11 +1,11 @@
-import { Form, NavLink } from "@remix-run/react";
+import { Form, Link, NavLink } from "@remix-run/react";
 import type { Film } from "~/api/films";
 export default function ListMedia({media, text}:{media:Film[], text:string}) {
   const base_img_url = 'https://image.tmdb.org/t/p/original';
 
   return (
-    <div className="py-2 px-16 font-sans">
-      <Form action="/search" className="flex lg:justify-end sm:justify-center">
+    <div className="pt-5 pb-10 px-16 font-sans">
+      <Form action="/search" method="get" className="flex lg:justify-end sm:justify-center">
         <label className="font-bold">
           <input 
             type="text" 
@@ -48,8 +48,10 @@ export default function ListMedia({media, text}:{media:Film[], text:string}) {
           key={item.id}
           className="hover:shadow-2xl hover:scale-105 hover:font-bold  transform transition duration-500 cursor-pointer"
           >
+        <Link to ={`/${item.id}?type=${item.media_type}`}>
             <div>{item.title || item.name}</div>
             <img className="rounded" src={`${base_img_url}${item.poster_path || item.backdrop_path || item.profile_path}`} alt={item.title || item.name} />
+          </Link>
           </li>
         ))}
       </ul>
